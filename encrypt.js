@@ -5,8 +5,11 @@ const saltRounds = 10;
 const Logins = require('./Schema');
 const { mongoose } = require('mongoose');
 const express = require('express');
+const { Console } = require('console');
 const app = express();
+require('dotenv').config();
 
+console.log();
 
 const namer = 'helloworld123';
 bcrypt.genSalt(saltRounds, (err, salt) => {
@@ -15,7 +18,7 @@ bcrypt.genSalt(saltRounds, (err, salt) => {
     })
 })
 
-bcrypt.compare('password', "$2b$10$u9QCQ/A8tRKSThNwyMqPFOBmiEkeZTHgbATCi4S0A.iqs8phJDVoW", (err, result) =>{
+bcrypt.compare('password', process.env.API_KEY, (err, result) =>{
     console.log(result)
 })
 
