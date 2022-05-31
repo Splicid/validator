@@ -22,8 +22,8 @@ bcrypt.compare('password', process.env.API_KEY, (err, result) =>{
     console.log(result)
 })
 
-const URL = "mongodb+srv://splicid:Splangle890()@Cluster0.d4hrn.mongodb.net/Cluster0?retryWrites=true&w=majority";
-mongoose.connect(URL)
+
+mongoose.connect(process.env.API_KEY)
     .then((result) =>  app.listen(3000))
     .catch((err) => console.log(err));
 
