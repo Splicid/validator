@@ -1,6 +1,4 @@
 const http = require('http');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const Logins = require('./Models/Schema');
 const express = require('express');
 const { Console } = require('console');
@@ -11,24 +9,28 @@ absolutePath = __dirname + "/index.html";
 app.use(express.urlencoded({extended: true}));
 
 
-app.listen(3000, () => console.log('Example app is listening on port 3000.'));
-console.log(db.connection())
+app.listen(3000, () => console.log('Running on port 3000.'));
+
+//checking if login credentials are correct
+const main = async (test) => {
+    //db.compareUser('testaccount', 'password')
+    let data = await db.compareUser('testaccount', 'password');
+    console.log(data)
+}
+main()
+//db.compareUser('testaccount', 'password');
+
 app.get('/', (res, req) => {
     req.sendFile(absolutePath)
 })
 
+const successful_login = (status) => {
+    console.log('login exectued')
+}
 
 
-// pass = "hello"
-// bcrypt.genSalt(saltRounds, (err, salt) => {
-//     bcrypt.hash(pass, salt, (err, hash) =>{
-//         console.log(hash)
-//     })
-// })
+module.exports = {successful_login};
 
-// bcrypt.compare('password', process.env.API_KEY, (err, result) =>{
-//     console.log(result)
-// })
 
 // app.get("/", (req,res) => {
 //     res.sendFile(absolutePath);

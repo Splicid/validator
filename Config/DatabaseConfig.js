@@ -1,26 +1,25 @@
 const { mongoose } = require('mongoose');
 const {MongoClient} = require('mongodb');
 const Logins = require('../Models/Schema');
+const dcrypters = require('../controllers/Authentication');
 require('dotenv').config();
 
-
-
 const connection = async () => {
-    console.log("test")
     mongoose.connect(process.env.API_KEY)
-    .then((result) => console.log())
-    .catch((err) => console.log(err));
-
-    Logins.find()
-    .then((results) => {
-        console.log(results)
-    })
-    .catch((err) => {
-        console.log(err)
-    });
+    // .then((result) => console.log())
+    // .catch((err) => console.log(err));
 }
 
-const hi = () => {
-    console.log('hi')
+const compareUser = async (user, userPass) => {
+    // Checks if user is in the database.
+    connection();
+    Logins.findOne({username: user}).select('password')
+
 }
-module.exports = {connection, hi};
+
+
+// compareUser()
+//     .then((result) =>{
+//         console.log(result);
+//     })
+module.exports = {connection, compareUser};
