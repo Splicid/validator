@@ -13,7 +13,15 @@ const connection = async () => {
 const compareUser = async (user, userPass) => {
     // Checks if user is in the database.
     connection();
-    Logins.findOne({username: user}).select('password')
+    // Checks if user is in db
+    const login = await Logins.findOne({username: user}).select('password')
+    //checks if password is in db
+    const passVal = await dcrypters.dcrypter(userPass, login.password)
+    if(login.password === null){
+        return false
+    }else{
+        return passVal
+    }
 
 }
 
