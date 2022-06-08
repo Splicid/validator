@@ -12,7 +12,6 @@ const connection = async () => {
 
 const compareUser = async (user, userPass) => {
     // Checks if user is in the database.
-    connection();
     // Checks if user is in db
     const login = await Logins.findOne({username: user}).select('password')
     //checks if password is in db
